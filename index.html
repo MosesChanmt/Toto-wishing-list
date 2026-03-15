@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Our Little Princess's Wishing List</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
     <style>
@@ -25,17 +25,13 @@
             cursor: default;
         }
 
-        /* 1. Magic Stars Trail Style */
+        /* Prevent background scroll when overlay is active */
+        body.no-scroll { overflow: hidden; }
+
         .star {
-            position: fixed;
-            top: 0; left: 0;
-            width: 10px; height: 10px;
-            background: var(--deep-pink);
-            pointer-events: none;
-            border-radius: 50%;
-            z-index: 9999;
-            opacity: 0.6;
-            transform: scale(1);
+            position: fixed; top: 0; left: 0; width: 10px; height: 10px;
+            background: var(--deep-pink); pointer-events: none; border-radius: 50%;
+            z-index: 10001; opacity: 0.6; transform: scale(1);
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
         }
 
@@ -48,79 +44,120 @@
 
         header {
             text-align: center;
-            padding: 60px 20px 40px 20px;
+            padding: 40px 20px 30px 20px;
             background: linear-gradient(to bottom, #ffeef1, var(--cream));
         }
 
-        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--deep-pink); margin: 0; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--deep-pink); margin: 0; }
 
         .countdown-container {
-            margin: 20px auto; max-width: 600px; background: white; padding: 15px 25px;
+            margin: 20px auto; max-width: 600px; background: white; padding: 12px 20px;
             border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 141, 161, 0.1);
-            display: flex; justify-content: center; gap: 15px; font-weight: 500;
+            display: flex; justify-content: center; gap: 10px; font-weight: 500;
         }
         .countdown-item { flex: 1; text-align: center; }
-        .countdown-num { display: block; font-size: 1.5rem; color: var(--deep-pink); }
-        .countdown-label { font-size: 0.7rem; color: #999; text-transform: uppercase; }
+        .countdown-num { display: block; font-size: 1.3rem; color: var(--deep-pink); }
+        .countdown-label { font-size: 0.6rem; color: #999; text-transform: uppercase; }
 
         #quote-area {
-            font-style: italic; margin-top: 10px; color: #ff8da1; min-height: 45px;
-            font-size: 0.95rem; transition: opacity 0.5s;
+            font-style: italic; margin-top: 10px; color: #ff8da1; min-height: 40px;
+            font-size: 0.9rem; transition: opacity 0.5s;
         }
 
         .tip-banner {
-            max-width: 800px; margin: 20px auto; width: calc(100% - 40px); box-sizing: border-box; background: rgba(255, 218, 224, 0.4);
-            padding: 15px 20px; border-radius: 15px; text-align: center;
-            font-size: 0.85rem; color: #777; border: 1px dashed var(--deep-pink); display: block;
+            max-width: 800px; margin: 15px auto; width: calc(100% - 40px); box-sizing: border-box; background: rgba(255, 218, 224, 0.4);
+            padding: 12px 15px; border-radius: 12px; text-align: center;
+            font-size: 0.8rem; color: #777; border: 1px dashed var(--deep-pink); display: block;
         }
 
         .container {
-            max-width: 1200px; margin: 0 auto; padding: 20px;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;
+            max-width: 1200px; margin: 0 auto; padding: 15px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px;
         }
 
-        /* 改進：卡片現在是整個可點擊的連結 */
         .item-card {
-            background: white; border-radius: 20px; padding: 25px 15px; text-align: center;
+            background: white; border-radius: 20px; padding: 20px 10px; text-align: center;
             box-shadow: 0 8px 20px rgba(255, 141, 161, 0.08); transition: all 0.3s ease;
             display: flex; flex-direction: column; justify-content: space-between;
-            text-decoration: none; /* 移除超連結底線 */
-            color: inherit; /* 繼承文字顏色 */
+            text-decoration: none; color: inherit; cursor: pointer;
         }
-        .item-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(255, 141, 161, 0.15); }
 
+        .icon { font-size: 40px; margin-bottom: 8px; display: block; }
+        h3 { color: var(--deep-pink); font-size: 1rem; margin: 5px 0; }
         .cash-card { border: 2px solid var(--gold); background: #fffdf5; }
         .whatsapp-card { border: 2px solid var(--whatsapp-green); background: #f7fffb; }
-
-        .icon { font-size: 45px; margin-bottom: 10px; display: block; }
-        h3 { color: var(--deep-pink); font-size: 1.1rem; margin: 10px 0 5px 0; }
-        .cash-card h3 { color: var(--gold); }
-        .whatsapp-card h3 { color: var(--whatsapp-green); }
-        p { font-size: 0.85rem; margin-bottom: 15px; color: #999; min-height: 40px; }
+        p { font-size: 0.75rem; margin-bottom: 12px; color: #999; min-height: 32px; }
 
         .btn {
-            display: inline-block; padding: 10px 20px; background-color: var(--deep-pink);
-            color: white !important; text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: 0.3s;
+            display: inline-block; padding: 8px 15px; background-color: var(--deep-pink);
+            color: white !important; text-decoration: none; border-radius: 25px; font-size: 0.85rem; transition: 0.3s;
         }
         .cash-btn { background-color: var(--gold); }
         .wa-btn { background-color: var(--whatsapp-green); }
-        .btn:hover { opacity: 0.9; }
+
+        #transfer-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98); z-index: 10000;
+            display: none; 
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        .transfer-content {
+            width: 85%; max-width: 380px; padding: 25px 20px; background: white;
+            border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1.5px solid var(--soft-pink); position: relative; text-align: center;
+            margin-bottom: 40px;
+        }
+        .etransfer-logo { width: 110px; margin-bottom: 15px; height: auto; }
+        .etransfer-info { 
+            background: #fdfaf4; padding: 15px 10px; border-radius: 12px; 
+            margin: 15px 0; border: 1px dashed var(--gold); 
+        }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #bbb; }
+        
+        #email-display { 
+            cursor: pointer; word-break: break-all; font-size: 1.1rem; 
+            color: #333; font-weight: 500; margin: 5px 0 0 0;
+            display: inline-block; padding: 4px 8px; border-radius: 5px;
+        }
+        
+        #copy-toast { 
+            color: var(--whatsapp-green); font-size: 0.75rem; font-weight: 500; 
+            margin-top: 4px; height: 18px; opacity: 0; transition: opacity 0.3s;
+        }
 
         #scrollTopBtn {
-            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px;
             background-color: var(--deep-pink); color: white; border: none; border-radius: 50%;
-            font-size: 24px; cursor: pointer; opacity: 0; transition: opacity 0.3s;
+            font-size: 20px; cursor: pointer; opacity: 0; transition: opacity 0.3s;
             z-index: 100; display: flex; align-items: center; justify-content: center;
         }
-        #scrollTopBtn.visible { opacity: 0.5; }
-        #scrollTopBtn:hover { opacity: 1; }
+        #scrollTopBtn.visible { opacity: 0.6; }
 
-        footer { text-align: center; padding: 60px 20px; color: #b5a4a7; font-size: 0.9rem; }
+        footer { text-align: center; padding: 40px 20px; color: #b5a4a7; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <div class="hearts" id="heartContainer"></div>
+
+    <div id="transfer-overlay">
+        <div class="transfer-content">
+            <span class="close-btn" onclick="toggleOverlay(false)">×</span>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Interac_e-Transfer_logo.png/330px-Interac_e-Transfer_logo.png" class="etransfer-logo">
+            <h2 style="color: var(--deep-pink); font-family: 'Dancing Script', cursive; font-size: 1.8rem; margin: 0 0 10px 0;">Thank You!</h2>
+            <p style="padding: 0 5px; margin: 0 0 15px 0; font-size: 0.85rem; color: #666; min-height: auto;">We truly appreciate your support and love to <b>Toto CHAN</b> ❤</p>
+            <div class="etransfer-info">
+                <p style="margin: 0; color: #888; font-size: 0.65rem; letter-spacing: 0.5px;">RECIPIENT EMAIL (Tap to copy)</p>
+                <p id="email-display" onclick="copyEmail()">moseschan.ca@gmail.com</p>
+                <div id="copy-toast">Email has been copied, thank you.</div>
+            </div>
+            <button class="btn" style="width: 100%;" onclick="toggleOverlay(false)">Back to List</button>
+        </div>
+    </div>
 
     <header>
         <h1>A Gift for Our Baby Girl To To Chan</h1>
@@ -147,7 +184,6 @@
     </footer>
 
     <script>
-        // --- 1. SETTINGS ---
         const dueDate = new Date(2026, 4, 23).getTime(); 
         const quotes = [
             '"A daughter is a gift of love." / 女兒是愛的禮物。',
@@ -156,7 +192,29 @@
             '"Your presence is the greatest gift." / 您的參與就是最好的禮物。'
         ];
 
-        // --- 2. SCROLL TOP BUTTON LOGIC ---
+        function toggleOverlay(show) {
+            const overlay = document.getElementById('transfer-overlay');
+            overlay.style.display = show ? 'flex' : 'none';
+            if (show) {
+                document.body.classList.add('no-scroll');
+                overlay.scrollTop = 0;
+            } else {
+                document.body.classList.remove('no-scroll');
+                document.getElementById('copy-toast').style.opacity = "0";
+            }
+        }
+
+        function copyEmail() {
+            const email = document.getElementById('email-display').innerText;
+            navigator.clipboard.writeText(email).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.style.opacity = "1";
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                }, 3000);
+            });
+        }
+
         window.onscroll = function() {
             const scrollBtn = document.getElementById('scrollTopBtn');
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { 
@@ -166,58 +224,39 @@
             }
         };
 
-        // --- 3. MAGIC STARS TRAIL ---
         document.addEventListener('mousemove', function(e) {
             const star = document.createElement('div');
             star.className = 'star';
-            star.style.left = e.clientX + 'px';
-            star.style.top = e.clientY + 'px';
-            
+            star.style.left = e.clientX + 'px'; star.style.top = e.clientY + 'px';
             const colors = ['#ffdae0', '#ff8da1', '#ffb6c1'];
             star.style.background = colors[Math.floor(Math.random() * colors.length)];
-            
             document.body.appendChild(star);
-
-            setTimeout(() => {
-                star.style.transform = `scale(0.1) translateY(${Math.random() * 50}px)`;
-                star.style.opacity = '0';
-            }, 10);
-
-            setTimeout(() => {
-                star.remove();
-            }, 800);
+            setTimeout(() => { star.style.transform = `scale(0.1) translateY(40px)`; star.style.opacity = '0'; }, 10);
+            setTimeout(() => { star.remove(); }, 800);
         });
 
-        // --- 4. COUNTDOWN ---
         function updateCountdown() {
             const now = new Date().getTime();
             const diff = dueDate - now;
             if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
             }
         }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        setInterval(updateCountdown, 1000); updateCountdown();
 
-        // --- 5. QUOTES ---
         let quoteIndex = 0;
         setInterval(() => {
             const qArea = document.getElementById('quote-area');
             qArea.style.opacity = 0;
-            setTimeout(() => {
-                quoteIndex = (quoteIndex + 1) % quotes.length;
-                qArea.innerText = quotes[quoteIndex];
-                qArea.style.opacity = 1;
-            }, 500);
+            setTimeout(() => { quoteIndex = (quoteIndex + 1) % quotes.length; qArea.innerText = quotes[quoteIndex]; qArea.style.opacity = 1; }, 500);
         }, 5000);
 
-        // --- 6. ITEMS LIST ---
         const items = [
-            { type: 'special', icon: "🧧", zh: "紅包祝福", en: "Cash Donation (PayMe)", link: "https://payme.hsbc/totowishinglist", class: "cash-card", btnClass: "cash-btn" },
-            { type: 'special', icon: "💬", zh: "傳送祝福", en: "Send Blessing (WhatsApp)", link: "https://wa.me/14373291212", class: "whatsapp-card", btnClass: "wa-btn" },
+            { type: 'special', icon: "🧧", zh: "紅包祝福", en: "Gift Donation (e-Transfer)", action: "overlay", class: "cash-card", btnClass: "cash-btn", btnLabel: "E-transfer" },
+            { type: 'special', icon: "💬", zh: "傳送祝福", en: "Send Blessing (WhatsApp)", link: "https://wa.me/14373291212", class: "whatsapp-card", btnClass: "wa-btn", btnLabel: "WhatsApp us" },
             { icon: "🪑", zh: "哺乳搖椅", en: "Nursery glider", q: "nursery+glider+chair" },
             { icon: "👑", zh: "高腳餐椅", en: "High chair", q: "Stokke+Tripp+Trapp+high+chair" },
             { icon: "🌙", zh: "床邊嬰兒床", en: "Bedside bassinet", q: "bedside+bassinet" },
@@ -250,15 +289,15 @@
 
         const grid = document.getElementById('registryGrid');
         items.forEach(item => {
-            // 改為創建 <a> 標籤而不是 <div>
-            const card = document.createElement('a');
+            const card = document.createElement(item.action === 'overlay' ? 'div' : 'a');
             card.className = 'item-card ' + (item.class || '');
             
-            const link = item.type === 'special' ? item.link : `https://www.amazon.ca/s?k=${item.q}`;
-            const btnText = item.type === 'special' ? (item.zh === "紅包祝福" ? "PayMe Link" : "WhatsApp Us") : "More information";
-            
-            card.href = link;
-            card.target = "_blank"; // 在新分頁打開
+            if (item.action === 'overlay') {
+                card.onclick = () => toggleOverlay(true);
+            } else {
+                card.href = item.link || `https://www.amazon.ca/s?k=${item.q}`;
+                card.target = "_blank";
+            }
             
             card.innerHTML = `
                 <div>
@@ -266,24 +305,19 @@
                     <h3>${item.zh}</h3>
                     <p>${item.en}</p>
                 </div>
-                <span class="btn ${item.btnClass || ''}">${btnText}</span>
+                <span class="btn ${item.btnClass || ''}">${item.btnLabel || 'Amazon.ca'}</span>
             `;
             grid.appendChild(card);
         });
 
-        // --- 7. HEARTS ---
-        const hContainer = document.getElementById('heartContainer');
         function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 5 + 's';
-            heart.style.fontSize = Math.random() * 15 + 10 + 'px';
-            hContainer.appendChild(heart);
+            const heart = document.createElement('div'); heart.classList.add('heart'); heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw'; heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+            heart.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.getElementById('heartContainer').appendChild(heart);
             setTimeout(() => heart.remove(), 7000);
         }
-        setInterval(createHeart, 500);
+        setInterval(createHeart, 600);
     </script>
 </body>
 </html>
