@@ -254,7 +254,7 @@
             const card = document.createElement('a');
             card.className = 'item-card ' + (item.class || '');
             
-            const link = item.type === 'special' ? item.link : `https://www.amazon.com/s?k=${item.q}`;
+            const link = item.type === 'special' ? item.link : `https://www.amazon.ca/s?k=${item.q}`;
             const btnText = item.type === 'special' ? (item.zh === "紅包祝福" ? "PayMe Link" : "WhatsApp Us") : "More information";
             
             card.href = link;
