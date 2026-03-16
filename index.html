@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Little Princess's Wishing List</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
     <style>
@@ -25,13 +25,17 @@
             cursor: default;
         }
 
-        /* Prevent background scroll when overlay is active */
-        body.no-scroll { overflow: hidden; }
-
+        /* 1. Magic Stars Trail Style */
         .star {
-            position: fixed; top: 0; left: 0; width: 10px; height: 10px;
-            background: var(--deep-pink); pointer-events: none; border-radius: 50%;
-            z-index: 10001; opacity: 0.6; transform: scale(1);
+            position: fixed;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
+            background: var(--deep-pink);
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 9999;
+            opacity: 0.6;
+            transform: scale(1);
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
         }
 
@@ -44,24 +48,24 @@
 
         header {
             text-align: center;
-            padding: 40px 20px 30px 20px;
+            padding: 60px 20px 40px 20px;
             background: linear-gradient(to bottom, #ffeef1, var(--cream));
         }
 
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--deep-pink); margin: 0; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--deep-pink); margin: 0; }
 
         .countdown-container {
-            margin: 20px auto; max-width: 600px; background: white; padding: 12px 20px;
+            margin: 20px auto; max-width: 600px; background: white; padding: 15px 25px;
             border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 141, 161, 0.1);
-            display: flex; justify-content: center; gap: 10px; font-weight: 500;
+            display: flex; justify-content: center; gap: 15px; font-weight: 500;
         }
         .countdown-item { flex: 1; text-align: center; }
-        .countdown-num { display: block; font-size: 1.3rem; color: var(--deep-pink); }
-        .countdown-label { font-size: 0.6rem; color: #999; text-transform: uppercase; }
+        .countdown-num { display: block; font-size: 1.5rem; color: var(--deep-pink); }
+        .countdown-label { font-size: 0.7rem; color: #999; text-transform: uppercase; }
 
         #quote-area {
-            font-style: italic; margin-top: 10px; color: #ff8da1; min-height: 40px;
-            font-size: 0.9rem; transition: opacity 0.5s;
+            font-style: italic; margin-top: 10px; color: #ff8da1; min-height: 45px;
+            font-size: 0.95rem; transition: opacity 0.5s;
         }
 
         .tip-banner {
@@ -70,30 +74,36 @@
             font-size: 0.8rem; color: #777; border: 1px dashed var(--deep-pink); display: block;
         }
 
-        .container {
-            max-width: 1200px; margin: 0 auto; padding: 15px;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px;
+.container {
+            max-width: 1200px; margin: 0 auto; padding: 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;
         }
 
         .item-card {
-            background: white; border-radius: 20px; padding: 20px 10px; text-align: center;
+            background: white; border-radius: 20px; padding: 25px 15px; text-align: center;
             box-shadow: 0 8px 20px rgba(255, 141, 161, 0.08); transition: all 0.3s ease;
             display: flex; flex-direction: column; justify-content: space-between;
-            text-decoration: none; color: inherit; cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
+        .item-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(255, 141, 161, 0.15); }
 
-        .icon { font-size: 40px; margin-bottom: 8px; display: block; }
-        h3 { color: var(--deep-pink); font-size: 1rem; margin: 5px 0; }
         .cash-card { border: 2px solid var(--gold); background: #fffdf5; }
         .whatsapp-card { border: 2px solid var(--whatsapp-green); background: #f7fffb; }
-        p { font-size: 0.75rem; margin-bottom: 12px; color: #999; min-height: 32px; }
+
+        .icon { font-size: 45px; margin-bottom: 10px; display: block; }
+        h3 { color: var(--deep-pink); font-size: 1.1rem; margin: 10px 0 5px 0; }
+        .cash-card h3 { color: var(--gold); }
+        .whatsapp-card h3 { color: var(--whatsapp-green); }
+        p { font-size: 0.85rem; margin-bottom: 15px; color: #999; min-height: 40px; }
 
         .btn {
-            display: inline-block; padding: 8px 15px; background-color: var(--deep-pink);
-            color: white !important; text-decoration: none; border-radius: 25px; font-size: 0.85rem; transition: 0.3s;
+            display: inline-block; padding: 10px 20px; background-color: var(--deep-pink);
+            color: white !important; text-decoration: none; border-radius: 25px; font-size: 0.9rem; transition: 0.3s;
         }
         .cash-btn { background-color: var(--gold); }
         .wa-btn { background-color: var(--whatsapp-green); }
+        .btn:hover { opacity: 0.9; }
 
         #transfer-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -258,10 +268,10 @@ const items = [
             { type: 'special', icon: "🧧", zh: "紅包祝福", en: "Gift Donation", action: "overlay", link: "https://payme.hsbc/totowishinglist", class: "cash-card", btnClass: "cash-btn", btnLabel: "E-transfer" },
             { type: 'special', icon: "💬", zh: "傳送祝福", en: "Send Blessing (WhatsApp)", link: "https://wa.me/14373291212", class: "whatsapp-card", btnClass: "wa-btn", btnLabel: "WhatsApp us" },
             { icon: "🪑", zh: "哺乳搖椅", en: "Nursery glider", q: "nursery+glider+chair" },
-            { icon: "👑", zh: "Stokke 高腳餐椅", en: "Stokke high chair", q: "Stokke+Tripp+Trapp+high+chair" },
+            { icon: "👑", zh: "高腳餐椅", en: "High chair", q: "Stokke+Tripp+Trapp+high+chair" },
             { icon: "🤱", zh: "吸乳器", en: "Breast pump", q: "breast+pump" },
             { icon: "🌙", zh: "床邊嬰兒床", en: "Bedside bassinet", q: "bedside+bassinet" },
-            { icon: "😴", zh: "嬰兒搖椅/鞦韆", en: "Baby swing (sleeper)", q: "baby+swing+sleeper" },
+            { icon: "😴", zh: "嬰兒搖椅/鞦韆", en: "Baby swing", q: "baby+swing+sleeper" },
             { icon: "🗄️", zh: "尿布收納櫃", en: "Baby changing cabinet", q: "baby+changing+table+cabinet" },
             { icon: "🤱", zh: "嬰兒背帶", en: "Baby carrier", q: "baby+carrier" },
             { icon: "📷", zh: "汽車安全座椅攝影機", en: "Car seat camera", q: "baby+car+seat+camera" },
